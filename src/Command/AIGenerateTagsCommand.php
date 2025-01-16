@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Command;
+
+use App\AI\Action\GenerateText\Action as GenerateTextAction;
+use Ibexa\Contracts\ConnectorAi\Action\DataType\Text;
+use Ibexa\Contracts\ConnectorAi\Action\RuntimeContext;
+use Ibexa\Contracts\ConnectorAi\ActionConfigurationServiceInterface;
+use Ibexa\Contracts\ConnectorAi\ActionServiceInterface;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
+class AIGenerateTagsCommand extends Command
+{
+    protected static $defaultName = 'ai:tags';
+
+    public function __construct(
+        private ActionServiceInterface $actionService,
+        private ActionConfigurationServiceInterface $actionConfigurationService,
+        private PermissionResolver $permissionResolver,
+        private UserService $userService
+    ) {
+        parent::__construct();
+    }
+
+    protected function configure()
+    {
+        $this->addArgument('text', InputArgument::REQUIRED);
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $io = new SymfonyStyle($input, $output);
+
+        $io->title("AI Tags");
+        $this->setUser('admin');
+
+        $actionConfiguration = $this->actionConfigurationService->getActionConfiguration('ai_tags');
+        $action = new GenerateTextAction(new Text([$input->getArgument('text')]));
+        $responseObject = $this->actionService->execute($action, $actionConfiguration);
+        $responseText = $responseObject->getOutput()->getList()[0];
+
+        $io->section('JSON response');
+        $io->text($responseText);
+
+        $io->section('Array dump');
+        $tagsArray = json_decode($responseText, true);
+        dump($tagsArray);
+
+        return Command::SUCCESS;
+    }
+
+    private function setUser(string $userLogin): void
+    {
+        $this->permissionResolver->setCurrentUserReference($this->userService->loadUserByLogin($userLogin));
+    }
+}

@@ -117,6 +117,12 @@ ibexa:
             user_content_type_identifier: ['user']
         site:
             languages: [eng-GB]
+            content_view:
+                full:
+                    blog_post:
+                        template: 'blog_post.html.twig'
+                        match:
+                            Identifier\ContentType: [blog_post]
 
         corporate_group:
             languages: [eng-GB]

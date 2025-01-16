@@ -26282,3 +26282,134 @@ body.ibexa-theme.ibexa-theme--dark .c-tb-element.c-tb-element--use-theme .c-tb-t
   display: inline-block;
   padding: 0.1875rem 0.625rem;
 }
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[3]!./vendor/ibexa/connector-ai/src/bundle/Resources/public/scss/connector-ai.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --ibexa-hover-color: var(--ibexa-hover-color, $ibexa-color-primary);
+  --ibexa-border-color: var(--ibexa-border-color, $ibexa-color-dark);
+}
+
+@keyframes remove-field {
+  100% {
+    height: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@keyframes item-remove-pulse {
+  0% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0 #f3f3f6;
+  }
+  10% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0 #f3f3f6;
+  }
+  20% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0.625rem #f3f3f6;
+  }
+  100% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0 #f3f3f6;
+  }
+}
+@keyframes item-highlight-pulse {
+  0% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 0 #ecf4ff;
+  }
+  10% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 0 #ecf4ff;
+  }
+  20% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 0.625rem #ecf4ff;
+  }
+  100% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0.25rem 0.125rem 1.0625rem 0 rgba(65, 145, 255, 0.05);
+  }
+}
+@keyframes spinner-animation {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.ibexa-ai-component__options-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 0.0625rem solid #e0e0e8;
+  font-size: 0.875rem;
+  margin: 0 1.0625rem;
+  padding: 0.5rem 0;
+}
+.ibexa-ai-component__btn-icon-wrapper {
+  margin-right: 0.75rem;
+  line-height: 1;
+}
+.ibexa-ai-component__btn-icon.ibexa-icon {
+  margin-right: 0;
+}
+.ibexa-ai-component__btn-spinner {
+  --mask: conic-gradient(rgba(0, 0, 0, 0) 10%, #000000),
+      linear-gradient(#000000 0 0) content-box;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.125rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ae1164;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: spinner-animation 1s infinite linear;
+  display: none;
+}
+.ibexa-ai-component__cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+}
+.ibexa-ai-component--disabled .ibexa-ai-component__btn-icon {
+  display: none;
+}
+.ibexa-ai-component--disabled .ibexa-ai-component__btn-spinner {
+  display: block;
+}
+
+.ibexa-ai-component-output--text .ibexa-input--text:disabled {
+  border-color: #8b0e50;
+  color: #71767c;
+  background-color: #ffffff;
+}
+
+.ibexa-ai-input-wrapper {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+.ibexa-ai-input-wrapper .ibexa-ai-component-output {
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+.ibexa-ai-input-wrapper__btn {
+  height: 3rem;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ibexa-ai-input-wrapper .ibexa-data-form-field {
+  margin-bottom: 0;
+}

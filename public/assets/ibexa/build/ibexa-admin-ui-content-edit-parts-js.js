@@ -9359,6 +9359,25 @@ var isSafari = function isSafari() {
 
 /***/ }),
 
+/***/ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/content.helper.js":
+/*!************************************************************************************************!*\
+  !*** ./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/content.helper.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getEditLanguageCode: () => (/* binding */ getEditLanguageCode)
+/* harmony export */ });
+var getEditLanguageCode = function getEditLanguageCode() {
+  var _window$document$quer;
+  return (_window$document$quer = window.document.querySelector('meta[name="LanguageCode"]')) === null || _window$document$quer === void 0 ? void 0 : _window$document$quer.content;
+};
+
+
+/***/ }),
+
 /***/ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper.js":
 /*!************************************************************************************************!*\
   !*** ./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper.js ***!
@@ -9495,6 +9514,304 @@ var isExternalInstance = function isExternalInstance() {
   var instanceUrl = restInfo.instanceUrl;
   return window.origin !== instanceUrl;
 };
+
+/***/ }),
+
+/***/ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/notification.helper.js":
+/*!*****************************************************************************************************!*\
+  !*** ./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/notification.helper.js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   showErrorNotification: () => (/* binding */ showErrorNotification),
+/* harmony export */   showInfoNotification: () => (/* binding */ showInfoNotification),
+/* harmony export */   showNotification: () => (/* binding */ showNotification),
+/* harmony export */   showSuccessNotification: () => (/* binding */ showSuccessNotification),
+/* harmony export */   showWarningNotification: () => (/* binding */ showWarningNotification)
+/* harmony export */ });
+/* harmony import */ var _context_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./context.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper.js");
+
+var NOTIFICATION_INFO_LABEL = 'info';
+var NOTIFICATION_SUCCESS_LABEL = 'success';
+var NOTIFICATION_WARNING_LABEL = 'warning';
+var NOTIFICATION_ERROR_LABEL = 'error';
+
+/**
+ * Dispatches notification event
+ *
+ * @function showNotification
+ * @param {Object} detail
+ * @param {String} detail.message
+ * @param {String} detail.label
+ * @param {Function} [detail.onShow] to be called after notification Node was added
+ * @param {Object} detail.rawPlaceholdersMap
+ */
+var showNotification = function showNotification(detail) {
+  var rootDOMElement = (0,_context_helper__WEBPACK_IMPORTED_MODULE_0__.getRootDOMElement)();
+  var event = new CustomEvent('ibexa-notify', {
+    detail: detail
+  });
+  rootDOMElement.dispatchEvent(event);
+};
+
+/**
+ * Dispatches info notification event
+ *
+ * @function showInfoNotification
+ * @param {String} message
+ * @param {Function} [onShow] to be called after notification Node was added
+ * @param {Object} rawPlaceholdersMap
+ */
+var showInfoNotification = function showInfoNotification(message, onShow) {
+  var rawPlaceholdersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  return showNotification({
+    message: message,
+    label: NOTIFICATION_INFO_LABEL,
+    onShow: onShow,
+    rawPlaceholdersMap: rawPlaceholdersMap
+  });
+};
+
+/**
+ * Dispatches success notification event
+ *
+ * @function showSuccessNotification
+ * @param {String} message
+ * @param {Function} [onShow] to be called after notification Node was added
+ * @param {Object} rawPlaceholdersMap
+ */
+var showSuccessNotification = function showSuccessNotification(message, onShow) {
+  var rawPlaceholdersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  return showNotification({
+    message: message,
+    label: NOTIFICATION_SUCCESS_LABEL,
+    onShow: onShow,
+    rawPlaceholdersMap: rawPlaceholdersMap
+  });
+};
+
+/**
+ * Dispatches warning notification event
+ *
+ * @function showWarningNotification
+ * @param {String} message
+ * @param {Function} [onShow] to be called after notification Node was added
+ * @param {Object} rawPlaceholdersMap
+ */
+var showWarningNotification = function showWarningNotification(message, onShow) {
+  var rawPlaceholdersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  return showNotification({
+    message: message,
+    label: NOTIFICATION_WARNING_LABEL,
+    onShow: onShow,
+    rawPlaceholdersMap: rawPlaceholdersMap
+  });
+};
+
+/**
+ * Dispatches error notification event
+ *
+ * @function showErrorNotification
+ * @param {(string | Error)} error
+ * @param {Function} [onShow] to be called after notification Node was added
+ * @param {Object} rawPlaceholdersMap
+ */
+var showErrorNotification = function showErrorNotification(error, onShow) {
+  var rawPlaceholdersMap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var isErrorObj = error instanceof Error;
+  var message = isErrorObj ? error.message : error;
+  showNotification({
+    message: message,
+    label: NOTIFICATION_ERROR_LABEL,
+    onShow: onShow,
+    rawPlaceholdersMap: rawPlaceholdersMap
+  });
+};
+
+
+/***/ }),
+
+/***/ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/object.instances.js":
+/*!**************************************************************************************************!*\
+  !*** ./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/object.instances.js ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   clearInstance: () => (/* binding */ clearInstance),
+/* harmony export */   getInstance: () => (/* binding */ getInstance),
+/* harmony export */   setInstance: () => (/* binding */ setInstance)
+/* harmony export */ });
+var setInstance = function setInstance(domElement, instance) {
+  if (domElement.ibexaInstance) {
+    throw new Error('Instance for this DOM element already exists!');
+  }
+  domElement.ibexaInstance = instance;
+};
+var getInstance = function getInstance(domElement) {
+  return domElement.ibexaInstance;
+};
+var clearInstance = function clearInstance(domElement) {
+  delete domElement.ibexaInstance;
+};
+
+
+/***/ }),
+
+/***/ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/request.helper.js":
+/*!************************************************************************************************!*\
+  !*** ./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/request.helper.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getJsonFromResponse: () => (/* binding */ getJsonFromResponse),
+/* harmony export */   getRequestHeaders: () => (/* binding */ getRequestHeaders),
+/* harmony export */   getRequestMode: () => (/* binding */ getRequestMode),
+/* harmony export */   getStatusFromResponse: () => (/* binding */ getStatusFromResponse),
+/* harmony export */   getTextFromResponse: () => (/* binding */ getTextFromResponse)
+/* harmony export */ });
+/* harmony import */ var _context_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./context.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+
+var getErrorMessage = function getErrorMessage(response) {
+  var responseErrorMessage = response.json().then(function (jsonResponse) {
+    var _jsonResponse$ErrorMe;
+    return (_jsonResponse$ErrorMe = jsonResponse.ErrorMessage) === null || _jsonResponse$ErrorMe === void 0 ? void 0 : _jsonResponse$ErrorMe.errorMessage;
+  });
+  return responseErrorMessage;
+};
+var handleRequest = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
+    var Translator, responseErrorMessage, errorMessage, defaultErrorMsg;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          if (response.ok) {
+            _context.next = 8;
+            break;
+          }
+          Translator = (0,_context_helper__WEBPACK_IMPORTED_MODULE_0__.getTranslator)();
+          _context.next = 4;
+          return getErrorMessage(response);
+        case 4:
+          responseErrorMessage = _context.sent;
+          errorMessage = responseErrorMessage || response.statusText;
+          defaultErrorMsg = Translator.trans(/*@Desc("Something went wrong. Try to refresh the page or contact your administrator.")*/'error.request.default_msg');
+          throw Error(errorMessage || defaultErrorMsg);
+        case 8:
+          return _context.abrupt("return", response);
+        case 9:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function handleRequest(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var getJsonFromResponse = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(response) {
+    var parsedRequest;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return handleRequest(response);
+        case 2:
+          parsedRequest = _context2.sent;
+          return _context2.abrupt("return", parsedRequest.json());
+        case 4:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return function getJsonFromResponse(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var getTextFromResponse = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(response) {
+    var parsedRequest;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return handleRequest(response);
+        case 2:
+          parsedRequest = _context3.sent;
+          return _context3.abrupt("return", parsedRequest.text());
+        case 4:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function getTextFromResponse(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var getStatusFromResponse = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(response) {
+    var parsedRequest;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return handleRequest(response);
+        case 2:
+          parsedRequest = _context4.sent;
+          return _context4.abrupt("return", parsedRequest.status);
+        case 4:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return function getStatusFromResponse(_x4) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+var getRequestMode = function getRequestMode(_ref5) {
+  var instanceUrl = _ref5.instanceUrl;
+  return window.location.origin === instanceUrl ? 'same-origin' : 'cors';
+};
+var getRequestHeaders = function getRequestHeaders(_ref6) {
+  var token = _ref6.token,
+    siteaccess = _ref6.siteaccess,
+    accessToken = _ref6.accessToken,
+    extraHeaders = _ref6.extraHeaders;
+  if (accessToken) {
+    return _objectSpread(_objectSpread({
+      Authorization: "Bearer ".concat(accessToken)
+    }, siteaccess && {
+      'X-Siteaccess': siteaccess
+    }), extraHeaders);
+  }
+  return _objectSpread(_objectSpread(_objectSpread({}, token && {
+    'X-CSRF-Token': token
+  }), siteaccess && {
+    'X-Siteaccess': siteaccess
+  }), extraHeaders);
+};
+
 
 /***/ }),
 
@@ -9860,6 +10177,492 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
     }, false);
   });
 })(window, window.document, window.ibexa);
+
+/***/ }),
+
+/***/ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/base.ai.component.js":
+/*!********************************************************************************************!*\
+  !*** ./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/base.ai.component.js ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BaseAIComponent)
+/* harmony export */ });
+/* harmony import */ var _ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_request_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/request.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/request.helper.js");
+/* harmony import */ var _ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_notification_helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/notification.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/notification.helper.js");
+/* harmony import */ var _ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_context_helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper.js");
+/* harmony import */ var _ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_tooltips_helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/tooltips.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/tooltips.helper.js");
+/* harmony import */ var _ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_object_instances__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/object.instances */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/object.instances.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+
+
+
+var BaseAIComponent = /*#__PURE__*/function () {
+  function BaseAIComponent(mainElement, config) {
+    var _this$container$query, _this$config$generati;
+    _classCallCheck(this, BaseAIComponent);
+    var Translator = (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_context_helper__WEBPACK_IMPORTED_MODULE_2__.getTranslator)();
+    var _mainElement$dataset = mainElement.dataset,
+      btnSelector = _mainElement$dataset.btnSelector,
+      optionsSelector = _mainElement$dataset.optionsSelector,
+      inputSelector = _mainElement$dataset.inputSelector,
+      outputSelector = _mainElement$dataset.outputSelector,
+      cancelWrapperSelector = _mainElement$dataset.cancelWrapperSelector,
+      extraConfig = _mainElement$dataset.extraConfig,
+      savePrevValue = _mainElement$dataset.savePrevValue;
+    this.mainElement = mainElement;
+    this.container = this.getContainer();
+    this.btnElement = this.container.querySelector(btnSelector);
+    this.optionsElements = this.container.querySelector(optionsSelector);
+    this.inputElement = this.container.querySelector(inputSelector);
+    this.outputElement = this.container.querySelector(outputSelector);
+    this.cancelWrapperElement = (_this$container$query = this.container.querySelector(cancelWrapperSelector)) !== null && _this$container$query !== void 0 ? _this$container$query : this.outputElement;
+    this.config = JSON.parse(extraConfig !== null && extraConfig !== void 0 ? extraConfig : '{}');
+    this.languageCode = config === null || config === void 0 ? void 0 : config.languageCode;
+    this.savePrevValue = !!savePrevValue;
+    this.generatingMsg = (_this$config$generati = this.config.generatingMsg) !== null && _this$config$generati !== void 0 ? _this$config$generati : Translator.trans(/*@Desc("AI is generating...")*/'ibexa_connector_ai.generating_msg', {}, 'ibexa_connector_ai');
+    this.endpointURL = '/api/ibexa/v2/ai/action/execute/{{ID}}';
+    this.abortFetch = this.abortFetch.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+    this.handleOptionClick = this.handleOptionClick.bind(this);
+    (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_object_instances__WEBPACK_IMPORTED_MODULE_4__.setInstance)(this.mainElement, this);
+  }
+  return _createClass(BaseAIComponent, [{
+    key: "getContainer",
+    value: function getContainer() {
+      var _this$mainElement$dat;
+      if ((_this$mainElement$dat = this.mainElement.dataset) !== null && _this$mainElement$dat !== void 0 && _this$mainElement$dat.containerSelector) {
+        return this.mainElement.closest(this.mainElement.dataset.containerSelector);
+      }
+      return window.document.body;
+    }
+  }, {
+    key: "toggle",
+    value: function toggle(forceEnabled) {
+      var _forceEnabled;
+      this.btnElement.disabled = (_forceEnabled = !forceEnabled) !== null && _forceEnabled !== void 0 ? _forceEnabled : !this.btnElement.disabled;
+      this.mainElement.classList.toggle('ibexa-ai-component--disabled', !forceEnabled);
+    }
+  }, {
+    key: "beforeFetchData",
+    value: function beforeFetchData() {
+      this.toggle(false);
+      this.injectCancelBtn();
+    }
+  }, {
+    key: "afterFetchData",
+    value: function afterFetchData() {
+      this.toggle(true);
+      this.removeCancelBtn();
+    }
+  }, {
+    key: "getRequestBody",
+    value: function getRequestBody() {}
+  }, {
+    key: "processError",
+    value: function processError(error) {
+      (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_notification_helper__WEBPACK_IMPORTED_MODULE_1__.showErrorNotification)(error);
+    }
+  }, {
+    key: "getEndpointURL",
+    value: function getEndpointURL(requestArguments) {
+      return this.endpointURL.replace('{{ID}}', requestArguments.id);
+    }
+  }, {
+    key: "fetchData",
+    value: function fetchData(requestArguments) {
+      var _this = this;
+      this.beforeFetchData(requestArguments);
+      this.abortController = new AbortController();
+      var endpointURL = this.getEndpointURL(requestArguments);
+      var body = this.getRequestBody(requestArguments);
+      var _getRestInfo = (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_context_helper__WEBPACK_IMPORTED_MODULE_2__.getRestInfo)(),
+        token = _getRestInfo.token,
+        siteaccess = _getRestInfo.siteaccess,
+        accessToken = _getRestInfo.accessToken;
+      var signal = this.abortController.signal;
+      var request = new Request(endpointURL, {
+        method: 'POST',
+        headers: (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_request_helper__WEBPACK_IMPORTED_MODULE_0__.getRequestHeaders)({
+          token: token,
+          siteaccess: siteaccess,
+          accessToken: accessToken,
+          extraHeaders: this.requestHeaders
+        }),
+        body: body,
+        mode: (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_request_helper__WEBPACK_IMPORTED_MODULE_0__.getRequestMode)({
+          instanceUrl: this.endpointURL
+        })
+      });
+      return fetch(request, {
+        signal: signal
+      }).then(_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_request_helper__WEBPACK_IMPORTED_MODULE_0__.getJsonFromResponse).then(function (response) {
+        _this.afterFetchData(response, requestArguments);
+      })["catch"](function (error) {
+        if (error.name === 'AbortError') {
+          return;
+        }
+        _this.afterFetchData(null, requestArguments);
+        _this.processError(error);
+      });
+    }
+  }, {
+    key: "abortFetch",
+    value: function abortFetch() {
+      this.abortController.abort();
+      this.toggle(true);
+      this.removeCancelBtn();
+    }
+  }, {
+    key: "injectCancelBtn",
+    value: function injectCancelBtn() {
+      var cancelBtnTemplate = this.mainElement.querySelector('.ibexa-ai-component__cancel-btn-template');
+      var clonedCancelBtnTemplate = cancelBtnTemplate.content.cloneNode(true);
+      this.cancelWrapperElement.append(clonedCancelBtnTemplate);
+      this.cancelBtn = this.cancelWrapperElement.querySelector('.ibexa-ai-component__cancel-btn');
+      (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_tooltips_helper__WEBPACK_IMPORTED_MODULE_3__.parse)(this.cancelBtn);
+      this.cancelBtn.addEventListener('click', this.abortFetch, false);
+    }
+  }, {
+    key: "removeCancelBtn",
+    value: function removeCancelBtn() {
+      this.cancelBtn.remove();
+    }
+  }, {
+    key: "handleOptionClick",
+    value: function handleOptionClick(event) {
+      var id = event.currentTarget.dataset.id;
+      this.fetchData({
+        id: id
+      });
+      this.optionsMenu.closeMenu();
+    }
+  }, {
+    key: "initOptionsMenu",
+    value: function initOptionsMenu() {
+      var _this2 = this;
+      this.optionsMenu = new window.ibexa.core.MultilevelPopupMenu({
+        container: this.optionsElements,
+        triggerElement: this.btnElement,
+        initialBranchPlacement: 'bottom-end',
+        initialBranchFallbackPlacements: ['top-end'],
+        processItemOnInitAfter: function processItemOnInitAfter(element) {
+          var btn = element.querySelector('[data-id]');
+          btn.addEventListener('click', _this2.handleOptionClick, false);
+        }
+      });
+      this.optionsMenu.init();
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      this.initOptionsMenu();
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/create.ai.module.js":
+/*!*******************************************************************************************!*\
+  !*** ./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/create.ai.module.js ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addModule: () => (/* binding */ addModule),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _modules_map__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules.map */ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/modules.map.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+var modulesMap = _objectSpread({}, _modules_map__WEBPACK_IMPORTED_MODULE_0__);
+var addModule = function addModule(module) {
+  modulesMap[module.name] = module;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (moduleName) {
+  if (!modulesMap[moduleName]) {
+    throw new Error("No module found for identifier \"".concat(moduleName, "\""));
+  }
+  return modulesMap[moduleName];
+});
+
+/***/ }),
+
+/***/ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/img.to.text.js":
+/*!**************************************************************************************!*\
+  !*** ./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/img.to.text.js ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ImageToText)
+/* harmony export */ });
+/* harmony import */ var _base_ai_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base.ai.component */ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/base.ai.component.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var ImageToText = /*#__PURE__*/function (_BaseAIComponent) {
+  function ImageToText(mainElement, config) {
+    var _this;
+    _classCallCheck(this, ImageToText);
+    _this = _callSuper(this, ImageToText, [mainElement, config]);
+    _this.imageQuality = _this.config.image_quality;
+    _this.maxSize = _this.config.image_max_size;
+    if (_this.savePrevValue) {
+      _this.prevValue = '';
+    }
+    return _this;
+  }
+  _inherits(ImageToText, _BaseAIComponent);
+  return _createClass(ImageToText, [{
+    key: "getScale",
+    value: function getScale(img) {
+      if (!this.maxSize) {
+        return 1;
+      }
+      var widthScale = this.maxSize.width / img.width;
+      var heightScale = this.maxSize.height / img.height;
+      return Math.min(widthScale, heightScale, 1);
+    }
+  }, {
+    key: "getBase64Image",
+    value: function getBase64Image(img) {
+      var canvas = document.createElement('canvas');
+      var scale = this.getScale(img);
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      var dataURL = canvas.toDataURL('image/jpeg', this.imageQuality);
+      canvas.remove();
+      return dataURL;
+    }
+  }, {
+    key: "getImgInput",
+    value: function getImgInput() {
+      if (this.tempImageElement.src.indexOf('data:image') === 0) {
+        return this.tempImageElement.src;
+      }
+      return this.getBase64Image(this.tempImageElement);
+    }
+  }, {
+    key: "getRequestBody",
+    value: function getRequestBody() {}
+  }, {
+    key: "getResponseValue",
+    value: function getResponseValue() {}
+  }, {
+    key: "beforeFetchData",
+    value: function beforeFetchData() {
+      _superPropGet(ImageToText, "beforeFetchData", this, 3)([]);
+      if (this.savePrevValue) {
+        this.prevValue = this.outputElement.value;
+      }
+      this.outputElement.value = this.generatingMsg;
+    }
+  }, {
+    key: "afterFetchData",
+    value: function afterFetchData(response) {
+      _superPropGet(ImageToText, "afterFetchData", this, 3)([]);
+      if (response) {
+        this.outputElement.value = this.getResponseValue(response);
+      } else {
+        this.outputElement.value = this.savePrevValue ? this.prevValue : '';
+      }
+    }
+  }, {
+    key: "abortFetch",
+    value: function abortFetch() {
+      _superPropGet(ImageToText, "abortFetch", this, 3)([]);
+      this.outputElement.value = this.savePrevValue ? this.prevValue : '';
+    }
+  }, {
+    key: "toggle",
+    value: function toggle(forceEnabled) {
+      _superPropGet(ImageToText, "toggle", this, 3)([forceEnabled]);
+      this.outputElement.disabled = !forceEnabled || !this.outputElement.disabled;
+    }
+  }, {
+    key: "initTempImage",
+    value: function initTempImage() {
+      this.tempImageElement = document.createElement('img');
+      this.tempImageElement.src = this.inputElement.src;
+      this.tempImageElement.style.maxWidth = 'initial';
+      this.tempImageElement.style.width = 'initial';
+      this.tempImageElement.style.height = 'initial';
+      this.tempImageElement.style.display = 'none';
+      this.container.append(this.tempImageElement);
+    }
+  }, {
+    key: "initImageObserver",
+    value: function initImageObserver() {
+      var _this2 = this;
+      var observerConfig = {
+        attributes: true,
+        attributeFilter: ['src']
+      };
+      this.imageObserver = new MutationObserver(function () {
+        _this2.tempImageElement.remove();
+        _this2.initTempImage();
+      });
+      this.imageObserver.observe(this.inputElement, observerConfig);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      _superPropGet(ImageToText, "init", this, 3)([]);
+      this.initTempImage();
+      this.initImageObserver();
+    }
+  }]);
+}(_base_ai_component__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/modules.map.js":
+/*!**************************************************************************************!*\
+  !*** ./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/modules.map.js ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ImgAlternativeText: () => (/* reexport safe */ _modules_img_alternative_text__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _modules_img_alternative_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/img.alternative.text */ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/modules/img.alternative.text.js");
+
+
+/***/ }),
+
+/***/ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/init.ai.js":
+/*!*****************************************************************************!*\
+  !*** ./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/init.ai.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_content_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/content.helper */ "./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/helpers/content.helper.js");
+/* harmony import */ var _core_create_ai_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/create.ai.module */ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/create.ai.module.js");
+
+
+(function (global, doc) {
+  var aiComponentBtns = doc.querySelectorAll('.ibexa-ai-component');
+  var languageCode = (0,_ibexa_admin_ui_src_bundle_Resources_public_js_scripts_helpers_content_helper__WEBPACK_IMPORTED_MODULE_0__.getEditLanguageCode)();
+  var initAIComponent = function initAIComponent(aiComponentBtn) {
+    var AIModule = (0,_core_create_ai_module__WEBPACK_IMPORTED_MODULE_1__["default"])(aiComponentBtn.dataset.type);
+    var aiComponent = new AIModule(aiComponentBtn, {
+      languageCode: languageCode
+    });
+    aiComponent.init();
+  };
+  aiComponentBtns.forEach(initAIComponent);
+  doc.body.addEventListener('ibexa-ai-component:initialize', function (event) {
+    return initAIComponent(event.detail.element);
+  });
+})(window, window.document);
+
+/***/ }),
+
+/***/ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/modules/img.alternative.text.js":
+/*!**************************************************************************************************!*\
+  !*** ./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/modules/img.alternative.text.js ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ImgAlternativeText)
+/* harmony export */ });
+/* harmony import */ var _core_img_to_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/img.to.text */ "./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/core/img.to.text.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var ImgAlternativeText = /*#__PURE__*/function (_ImgToText) {
+  function ImgAlternativeText(mainElement, config) {
+    var _this;
+    _classCallCheck(this, ImgAlternativeText);
+    _this = _callSuper(this, ImgAlternativeText, [mainElement, config]);
+    _this.requestHeaders = {
+      Accept: 'application/vnd.ibexa.api.ai.AltText+json',
+      'Content-Type': 'application/vnd.ibexa.api.ai.GenerateAltText+json'
+    };
+    return _this;
+  }
+  _inherits(ImgAlternativeText, _ImgToText);
+  return _createClass(ImgAlternativeText, [{
+    key: "getRequestBody",
+    value: function getRequestBody() {
+      var body = {
+        GenerateAltText: {
+          Image: {
+            base64: this.getImgInput()
+          },
+          RuntimeContext: {}
+        }
+      };
+      if (this.languageCode) {
+        body.GenerateAltText.RuntimeContext.languageCode = this.languageCode;
+      }
+      return JSON.stringify(body);
+    }
+  }, {
+    key: "getResponseValue",
+    value: function getResponseValue(response) {
+      return response.AltText.Text.text[0];
+    }
+  }]);
+}(_core_img_to_text__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
 
 /***/ }),
 
@@ -10853,6 +11656,6 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ var __webpack_exports__ = (__webpack_exec__("./vendor/ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/leaflet/dist/leaflet.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/admin.content.edit.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/base-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/base-file-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/base-preview-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/multi-input-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezauthor.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezbinaryfile.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezboolean.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezcountry.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezdate.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezdatetime.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezemail.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezfloat.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezgmaplocation.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezimage.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezimageasset.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezinteger.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezkeyword.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezmedia.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezobjectrelationlist.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezrichtext.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezselection.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezstring.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/eztext.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/eztime.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezurl.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezuser.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/sidebar/extra.actions.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/edit.header.js"), __webpack_exec__("./vendor/ibexa/fieldtype-matrix/src/bundle/Resources/public/js/scripts/fieldType/ezmatrix.js"), __webpack_exec__("./vendor/ibexa/connector-dam/src/bundle/Resources/public/js/ezdam.js"), __webpack_exec__("./vendor/ibexa/measurement/src/bundle/Resources/public/js/field.measurement.validator.js"), __webpack_exec__("./vendor/ibexa/image-editor/src/bundle/Resources/public/js/ezimage.edit.js"), __webpack_exec__("./vendor/ibexa/image-editor/src/bundle/Resources/public/js/ezimageasset.edit.js"), __webpack_exec__("./vendor/ibexa/taxonomy/src/bundle/Resources/public/js/fieldType/ibexa_taxonomy_entry_assignment.js"), __webpack_exec__("./vendor/ibexa/fieldtype-address/src/bundle/Resources/public/js/scripts/fieldType/ibexa_address.js"));
+/******/ var __webpack_exports__ = (__webpack_exec__("./vendor/ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/leaflet/dist/leaflet.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/admin.content.edit.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/base-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/base-file-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/base-preview-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/base/multi-input-field.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezauthor.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezbinaryfile.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezboolean.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezcountry.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezdate.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezdatetime.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezemail.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezfloat.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezgmaplocation.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezimage.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezimageasset.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezinteger.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezkeyword.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezmedia.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezobjectrelationlist.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezrichtext.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezselection.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezstring.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/eztext.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/eztime.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezurl.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/fieldType/ezuser.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/sidebar/extra.actions.js"), __webpack_exec__("./vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/edit.header.js"), __webpack_exec__("./vendor/ibexa/fieldtype-matrix/src/bundle/Resources/public/js/scripts/fieldType/ezmatrix.js"), __webpack_exec__("./vendor/ibexa/connector-dam/src/bundle/Resources/public/js/ezdam.js"), __webpack_exec__("./vendor/ibexa/measurement/src/bundle/Resources/public/js/field.measurement.validator.js"), __webpack_exec__("./vendor/ibexa/image-editor/src/bundle/Resources/public/js/ezimage.edit.js"), __webpack_exec__("./vendor/ibexa/image-editor/src/bundle/Resources/public/js/ezimageasset.edit.js"), __webpack_exec__("./vendor/ibexa/taxonomy/src/bundle/Resources/public/js/fieldType/ibexa_taxonomy_entry_assignment.js"), __webpack_exec__("./vendor/ibexa/fieldtype-address/src/bundle/Resources/public/js/scripts/fieldType/ibexa_address.js"), __webpack_exec__("./vendor/ibexa/connector-ai/src/bundle/Resources/public/js/init.ai.js"));
 /******/ }
 ]);

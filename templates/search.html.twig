@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Keyword search VS Semantic search</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+    <meta name="theme-color" content="#7952b3">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        body {
+            padding: 20px;
+            font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border: 2px dotted lightslategrey;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 2em;
+            border-radius: 15px;
+
+            border: 2px solid lightslategrey;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        hr {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            color: lightslategrey;
+        }
+
+        td {
+            font-size: 1.3em;
+        }
+
+        th {
+            font-size: 1.5em;
+            text-align: right;
+            padding-right: 15px;
+            border-right: 3px solid lightslategrey;
+        }
+
+        li {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Keyword VS Semantic Search</h1>
+    <div style="text-align: center">
+        <form method="get">
+            <input type="text" name="query" placeholder="Type in something..." {% if query is not empty %}
+                value="{{ query }}"
+            {% endif %} /> <input type="submit" value="Search!">
+        </form>
+    </div>
+    {% if query is not empty %}
+    <hr>
+    <h2>Search results for "{{ query }}" (Blog Posts, limit: 3)</h2>
+    <table>
+        <tr>
+            <th>Keyword Search</th>
+            <td>
+                <ol>
+                    {% for keywordHit in keywordHits %}
+                        <li>
+                            <a href="{{ ibexa_path(ibexa_route("ibexa.url.alias", { 'contentId': keywordHit.valueObject.id })) }}">{{ ibexa_content_name(keywordHit.valueObject) }}</a>
+                        </li>
+                    {% else %}
+                        <i>nothing found</i>
+                    {% endfor %}
+                </ol>
+            </td>
+        </tr>
+        <tr><td colspan="2" style="text-align: center; font-size: 1.5em"><strong>VS</strong></td></tr>
+        <tr>
+            <th>Semantic Search</th>
+            <td>
+                <ol>
+                    {% for semanticHit in semanticHits %}
+                        <li>
+                            <a href="{{ ibexa_path(ibexa_route("ibexa.url.alias", { 'contentId': semanticHit.content.id })) }}">{{ ibexa_content_name(semanticHit.content) }}</a>
+                        </li>
+                    {% else %}
+                        <i>nothing found</i>
+                    {% endfor %}
+                </ol>
+            </td>
+        </tr>
+    </table>
+    {% endif %}
+</body>
+</html>

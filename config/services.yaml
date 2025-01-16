@@ -22,3 +22,98 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Subscribers
+    App\EventSubscriber\BlogPostAIEventSubscriber:
+        arguments:
+            $richTextConverter: '@ibexa.richtext.converter.output.xhtml5'
+
+    # GenerateText
+    App\AI\Action\GenerateText\ActionType:
+        arguments:
+            $actionHandlers: !tagged_iterator
+                tag: app.connector_ai.action.handler.text_to_text
+                default_index_method: getIdentifier
+                index_by: key
+        tags:
+            - { name: ibexa.ai.action.type, identifier: !php/const \App\AI\Action\GenerateText\ActionType::IDENTIFIER }
+
+    App\AI\Handler\OllamaTextToTextActionHandler:
+        tags:
+            - { name: ibexa.ai.action.handler, priority: 0 }
+            - { name: app.connector_ai.action.handler.text_to_text, priority: 0 }
+
+    app.connector_ai.action_configuration.handler.ollama_text_to_text.form_mapper.options:
+        class: Ibexa\Bundle\ConnectorAi\Form\FormMapper\ActionConfiguration\ActionHandlerOptionsFormMapper
+        arguments:
+            $formType: 'App\Form\Type\TextToTextOptionsType'
+        tags:
+            - name: ibexa.connector_ai.action_configuration.form_mapper.options
+              type: !php/const \App\AI\Handler\OllamaTextToTextActionHandler::IDENTIFIER
+
+    # Embeddings
+    App\AI\Action\TextToEmbeddings\ActionType:
+        arguments:
+            $actionHandlers: !tagged_iterator
+                tag: app.connector_ai.action.handler.text_to_embeddings
+                default_index_method: getIdentifier
+                index_by: key
+        tags:
+            - { name: ibexa.ai.action.type, identifier: !php/const \App\AI\Action\TextToEmbeddings\ActionType::IDENTIFIER }
+
+    App\AI\Handler\OllamaTextToEmbeddingsActionHandler:
+        tags:
+            - { name: ibexa.ai.action.handler, priority: 0 }
+            - { name: app.connector_ai.action.handler.text_to_embeddings, priority: 0 }
+
+    # Vector Store
+    App\AI\Embeddings\PsVectorStore:
+        arguments:
+            $connectionString: '%env(PS_VECTOR_STORE_CONNECTION_STRING)%'
+
+
+    # Tools
+    App\AI\Action\TextWithFunction\ActionType:
+        arguments:
+            $actionHandlers: !tagged_iterator
+                tag: app.connector_ai.action.handler.text_with_tools
+                default_index_method: getIdentifier
+                index_by: key
+        tags:
+            - { name: ibexa.ai.action.type, identifier: !php/const \App\AI\Action\TextWithFunction\ActionType::IDENTIFIER }
+
+    App\AI\Handler\OllamaTextToToolActionHandler:
+        tags:
+            - { name: ibexa.ai.action.handler, priority: 0 }
+            - { name: app.connector_ai.action.handler.text_with_tools, priority: 0 }
+
+    app.connector_ai.action_configuration.handler.text_with_tools.form_mapper.options:
+        class: Ibexa\Bundle\ConnectorAi\Form\FormMapper\ActionConfiguration\ActionHandlerOptionsFormMapper
+        arguments:
+            $formType: 'App\Form\Type\FunctionAwareTextToTextOptionsType'
+        tags:
+            - name: ibexa.connector_ai.action_configuration.form_mapper.options
+              type: !php/const \App\AI\Handler\OllamaTextToToolActionHandler::IDENTIFIER
+
+    # Question with Context
+    App\AI\Action\AnswerQuestionWithContext\ActionType:
+        arguments:
+            $actionHandlers: !tagged_iterator
+                tag: app.connector_ai.action.handler.answer_question_with_context
+                default_index_method: getIdentifier
+                index_by: key
+        tags:
+            - { name: ibexa.ai.action.type, identifier: !php/const \App\AI\Action\AnswerQuestionWithContext\ActionType::IDENTIFIER }
+
+    App\AI\Handler\OllamaTextWithContextToTextActionHandler:
+        tags:
+            - { name: ibexa.ai.action.handler, priority: 0 }
+            - { name: app.connector_ai.action.handler.answer_question_with_context, priority: 0 }
+
+    app.connector_ai.action_configuration.handler.answer_question_with_context.form_mapper.options:
+        class: Ibexa\Bundle\ConnectorAi\Form\FormMapper\ActionConfiguration\ActionHandlerOptionsFormMapper
+        arguments:
+            $formType: 'App\Form\Type\AnswerQuestionWithContextOptionsType'
+        tags:
+            - name: ibexa.connector_ai.action_configuration.form_mapper.options
+              type: !php/const \App\AI\Handler\OllamaTextWithContextToTextActionHandler::IDENTIFIER

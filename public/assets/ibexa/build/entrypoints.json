@@ -998,6 +998,27 @@
       "css": [
         "/assets/ibexa/build/ibexa-qualifio-block-css.css"
       ]
+    },
+    "ibexa-connector-ai-action-configuration-list-js": {
+      "js": [
+        "/assets/ibexa/build/runtime.js",
+        "/assets/ibexa/build/ibexa-connector-ai-action-configuration-list-js.js"
+      ]
+    },
+    "ibexa-connector-ai-action-configuration-view-js": {
+      "js": [
+        "/assets/ibexa/build/runtime.js",
+        "/assets/ibexa/build/ibexa-connector-ai-action-configuration-view-js.js"
+      ]
+    },
+    "ibexa-connector-ai-action-view-css": {
+      "js": [
+        "/assets/ibexa/build/runtime.js",
+        "/assets/ibexa/build/ibexa-connector-ai-action-view-css.js"
+      ],
+      "css": [
+        "/assets/ibexa/build/ibexa-connector-ai-action-view-css.css"
+      ]
     }
   }
 }
